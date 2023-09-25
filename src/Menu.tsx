@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
 
-import { Box, IconButton, ListItemButton, ListItemIcon, Tooltip, Typography, css } from '@mui/material'
+import { Box, Divider, ListItemButton, ListItemIcon, css } from '@mui/material'
 import Drawer from '@mui/material/Drawer'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
-import MenuIcon from '@mui/icons-material/Menu'
+import HomeIcon from '@mui/icons-material/Home'
 import ColorLensIcon from '@mui/icons-material/ColorLens'
 
 import plotterArt from './content'
@@ -22,15 +22,16 @@ const Menu = ({ isOpen, toggleMenu }: Props) => {
       onClose={toggleMenu}
     >
       <Box css={menuCSS}>
-        <Box css={headerCSS}>
-          <Tooltip title="Open Menu">
-            <IconButton onClick={toggleMenu}>
-              <MenuIcon />
-            </IconButton>
-          </Tooltip>
-          <Typography variant="h1">Menu</Typography>
-        </Box>
         <List>
+          <ListItem disablePadding>
+            <ListItemButton href="/">
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText primary="Home" />
+            </ListItemButton>
+          </ListItem>
+          <Divider />
           {
             plotterArt.sort((a, b) => a.title > b.title ? 1 : -1).map((art, i) => (
               <ListItem disablePadding key={art.title}>
@@ -49,14 +50,8 @@ const Menu = ({ isOpen, toggleMenu }: Props) => {
   )
 }
 
-const headerCSS = css`
-  display: flex;
-  flex-direction: row;
-`
-
 const menuCSS = css`
   width: 300px;
-  border: 2px solid red;
 `
 
 export default Menu
