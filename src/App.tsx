@@ -1,22 +1,76 @@
 /** @jsxImportSource @emotion/react */
 
-import { Box, css } from '@mui/material'
+import { Box, css, Experimental_CssVarsProvider, ToggleButton, Tooltip } from '@mui/material'
 
 import './style.css'
 import plotterArt from './content'
 import PlotterArt from './PlotterArt'
+import { useCallback, useMemo, useState } from 'react'
+import Menu from './Menu'
+import { lightTheme, darkTheme } from './theme'
 
-function App () {
+interface ThemePickerProps {
+  toggleTheme: () => void
+  theme: 'light' | 'dark'
+}
+
+const ThemePicker = ({ toggleTheme, theme }: ThemePickerProps) => {
   return (
-   <Box css={wrapperCSS}>
-    {plotterArt.map((art) => (
-       <PlotterArt key={art.title} {...art} />
-    ))}
-   </Box>
+    <Box css={themePickerCSS}>
+      <ToggleButton
+        size='medium'
+        value="text"
+        onChange={toggleTheme}
+        css={css`width: 50px; height: 50px; font-size: 30px`}
+      >
+        <Tooltip title="Toggle theme" >
+          <span>{theme === 'light' ? '🌙' : '☀️'}</span>
+        </Tooltip>
+      </ToggleButton>
+    </Box>
+  )
+}
+
+function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [themeName, setThemeName] = useState<'light' | 'dark'>('light')
+
+  const theme = useMemo(() => {
+    return {
+      light: lightTheme,
+      dark: darkTheme
+    }[themeName]
+  }, [themeName])
+  console.log(themeName, theme)
+
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen(prev => !prev)
+  }, [])
+
+  const toggleTheme = useCallback(() => {
+    setThemeName(prev => prev === 'light' ? 'dark' : 'light')
+  }, [])
+
+  return (
+    <Experimental_CssVarsProvider theme={theme}>
+      <ThemePicker toggleTheme={toggleTheme} theme={themeName} />
+      <Box css={wrapperCSS}>
+        {plotterArt.map((art) => (
+          <PlotterArt key={art.title} {...art} />
+        ))}
+      </Box>
+      <Menu isOpen={isMenuOpen} toggleMenu={toggleMenu} />
+    </Experimental_CssVarsProvider>
   )
 }
 
 const wrapperCSS = css`
+          `
+
+const themePickerCSS = css`
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
 `
 
 export default App
