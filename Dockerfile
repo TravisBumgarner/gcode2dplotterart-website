@@ -1,31 +1,11 @@
-# Get NPM packages
-FROM node:14-alpine AS dependencies
-RUN apk add --no-cache libc6-compat
-WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci --only=production
-
-# Rebuild the source code only when needed
-FROM node:14-alpine AS builder
+FROM node:20-alpine3.17 AS builder
 WORKDIR /app
 COPY . .
-COPY --from=dependencies /app/node_modules ./node_modules
-RUN npm run build
+RUN yarn
+RUN yarn build
 
-# Production image, copy all the files and run next
-FROM node:14-alpine AS runner
+FROM mhart/alpine-node
+RUN yarn global add serve
 WORKDIR /app
-
-ENV NODE_ENV production
-
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
-
-COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
-
-USER nextjs
-EXPOSE 3000
-
-CMD ["npm", "start"]
+COPY --from=builder /app/build .
+CMD ["serve", "-p", "8080", "-s", "."]
