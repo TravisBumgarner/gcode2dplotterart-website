@@ -1,15 +1,22 @@
 /** @jsxImportSource @emotion/react */
 
-import { Box, css } from '@mui/material';
+import { Box, css } from '@mui/material'
 
-function App() {
+import './style.css'
+import plotterArt from './content'
+import PlotterArt from './PlotterArt'
+
+function App () {
   return (
-   <Box css={wrapperCSS}>Hello World</Box>
-  );
+   <Box css={wrapperCSS}>
+    {plotterArt.map((art) => (
+       <PlotterArt key={art.title} {...art} />
+    ))}
+   </Box>
+  )
 }
 
 const wrapperCSS = css`
-  border: 2px solid red;
 `
 
-export default App;
+export default App
