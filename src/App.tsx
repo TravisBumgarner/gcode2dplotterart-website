@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 
-import { Box, css, Experimental_CssVarsProvider, ToggleButton, Tooltip } from '@mui/material'
+import { Box, css, Experimental_CssVarsProvider, IconButton, ToggleButton, Tooltip } from '@mui/material'
+import MenuIcon from '@mui/icons-material/Menu'
 
 import './style.css'
 import plotterArt from './content'
@@ -53,7 +54,14 @@ function App() {
 
   return (
     <Experimental_CssVarsProvider theme={theme}>
-      <ThemePicker toggleTheme={toggleTheme} theme={themeName} />
+      <Box css={headerCSS}>
+        <Tooltip title="Open Menu">
+          <IconButton onClick={toggleMenu}>
+            <MenuIcon />
+          </IconButton>
+        </Tooltip>
+        <ThemePicker toggleTheme={toggleTheme} theme={themeName} />
+      </Box>
       <Box css={wrapperCSS}>
         {plotterArt.map((art) => (
           <PlotterArt key={art.title} {...art} />
@@ -63,6 +71,11 @@ function App() {
     </Experimental_CssVarsProvider>
   )
 }
+
+const headerCSS = css`
+  display: flex;
+  justify-content: space-between;
+`
 
 const wrapperCSS = css`
           `

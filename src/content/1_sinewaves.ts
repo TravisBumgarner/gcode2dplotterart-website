@@ -39,7 +39,8 @@ if __name__ == "__main__":
 const plotterArt: TPlotterArt = {
   title: 'Sine Waves',
   description: 'Series of sine waves plotted with increasing amplitude',
-  code
+  code,
+  id: 'sine_waves'
 }
 
 export default plotterArt

@@ -7,7 +7,8 @@ const code = `
 const plotterArt: TPlotterArt = {
   title: '',
   description: '',
-  code
+  code,
+  id: ''
 }
 
 export default plotterArt
