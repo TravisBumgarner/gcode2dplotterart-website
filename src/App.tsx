@@ -10,28 +10,6 @@ import { useCallback, useMemo, useState } from 'react'
 import Menu from './Menu'
 import { lightTheme, darkTheme } from './theme'
 
-interface ThemePickerProps {
-  toggleTheme: () => void
-  theme: 'light' | 'dark'
-}
-
-const ThemePicker = ({ toggleTheme, theme }: ThemePickerProps) => {
-  return (
-    <Box css={themePickerCSS}>
-      <ToggleButton
-        size='medium'
-        value="text"
-        onChange={toggleTheme}
-        css={css`width: 50px; height: 50px; font-size: 30px`}
-      >
-        <Tooltip title="Toggle theme" >
-          <span>{theme === 'light' ? '🌙' : '☀️'}</span>
-        </Tooltip>
-      </ToggleButton>
-    </Box>
-  )
-}
-
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [themeName, setThemeName] = useState<'light' | 'dark'>('light')
@@ -56,11 +34,20 @@ function App() {
     <Experimental_CssVarsProvider theme={theme}>
       <Box css={headerCSS}>
         <Tooltip title="Open Menu">
-          <IconButton onClick={toggleMenu}>
+          <IconButton onClick={toggleMenu} css={css`align-self: start`}>
             <MenuIcon />
           </IconButton>
         </Tooltip>
-        <ThemePicker toggleTheme={toggleTheme} theme={themeName} />
+        <ToggleButton
+          size='medium'
+          value="text"
+          onChange={toggleTheme}
+          css={css`width: 30; height: 30; font-size: 25px`}
+        >
+          <Tooltip title="Toggle theme" >
+            <span>{themeName === 'light' ? '🌙' : '☀️'}</span>
+          </Tooltip>
+        </ToggleButton>
       </Box>
       <Box css={wrapperCSS}>
         {plotterArt.map((art) => (
@@ -79,11 +66,5 @@ const headerCSS = css`
 
 const wrapperCSS = css`
           `
-
-const themePickerCSS = css`
-  position: fixed;
-  right: 1rem;
-  top: 1rem;
-`
 
 export default App
