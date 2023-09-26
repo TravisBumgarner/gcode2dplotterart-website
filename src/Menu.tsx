@@ -1,57 +1,34 @@
 /** @jsxImportSource @emotion/react */
 
-import { Box, Divider, ListItemButton, ListItemIcon, css } from '@mui/material'
-import Drawer from '@mui/material/Drawer'
+import { Box, ListItemButton, css } from '@mui/material'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
-import HomeIcon from '@mui/icons-material/Home'
-import ColorLensIcon from '@mui/icons-material/ColorLens'
 
 import plotterArt from './content'
 
-interface Props {
-  isOpen: boolean
-  toggleMenu: () => void
-}
+export const MENU_WIDTH = 250
 
-const Menu = ({ isOpen, toggleMenu }: Props) => {
+const Menu = () => {
   return (
-    <Drawer
-      open={isOpen}
-      onClose={toggleMenu}
-    >
-      <Box css={menuCSS}>
-        <List>
-          <ListItem disablePadding>
-            <ListItemButton href="/">
-              <ListItemIcon>
-                <HomeIcon />
-              </ListItemIcon>
-              <ListItemText primary="Home" />
-            </ListItemButton>
-          </ListItem>
-          <Divider />
-          {
-            plotterArt.sort((a, b) => a.title > b.title ? 1 : -1).map((art, i) => (
-              <ListItem disablePadding key={art.title}>
-                <ListItemButton href={art.id}>
-                  <ListItemIcon>
-                    <ColorLensIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={art.title} secondary={art.description} />
-                </ListItemButton>
-              </ListItem>
-            ))
-          }
-        </List>
-      </Box>
-    </Drawer>
+    <Box css={menuCSS}>
+      <List>
+        {
+          plotterArt.sort((a, b) => a.title > b.title ? 1 : -1).map((art, i) => (
+            <ListItem disablePadding key={art.title}>
+              <ListItemButton href={art.id}>
+                <ListItemText primary={art.title} secondary={art.description} />
+              </ListItemButton>
+            </ListItem>
+          ))
+        }
+      </List>
+    </Box>
   )
 }
 
 const menuCSS = css`
-  width: 300px;
+  width: ${MENU_WIDTH}px;
 `
 
 export default Menu

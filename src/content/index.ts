@@ -8,6 +8,9 @@ export interface TPlotterArt {
 }
 
 const plotterArt: TPlotterArt[] = [
+  sinewaves,
+  sinewaves,
+  sinewaves,
   sinewaves
 ]
 

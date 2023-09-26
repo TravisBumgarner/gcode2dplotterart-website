@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { Box, css, Experimental_CssVarsProvider, IconButton, ToggleButton, Tooltip } from '@mui/material'
-import MenuIcon from '@mui/icons-material/Menu'
+import { Box, css, Experimental_CssVarsProvider, ToggleButton, Tooltip } from '@mui/material'
 
 import './style.css'
 import plotterArt from './content'
@@ -11,7 +10,6 @@ import Menu from './Menu'
 import { lightTheme, darkTheme } from './theme'
 
 function App() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [themeName, setThemeName] = useState<'light' | 'dark'>('light')
 
   const theme = useMemo(() => {
@@ -22,49 +20,50 @@ function App() {
   }, [themeName])
   console.log(themeName, theme)
 
-  const toggleMenu = useCallback(() => {
-    setIsMenuOpen(prev => !prev)
-  }, [])
-
   const toggleTheme = useCallback(() => {
     setThemeName(prev => prev === 'light' ? 'dark' : 'light')
   }, [])
 
   return (
     <Experimental_CssVarsProvider theme={theme}>
-      <Box css={headerCSS}>
-        <Tooltip title="Open Menu">
-          <IconButton onClick={toggleMenu} css={css`align-self: start`}>
-            <MenuIcon />
-          </IconButton>
+      <ToggleButton
+        size='medium'
+        value="text"
+        onChange={toggleTheme}
+        css={toggleCSS}
+      >
+        <Tooltip title="Toggle theme" >
+          <span>{themeName === 'light' ? '🌙' : '☀️'}</span>
         </Tooltip>
-        <ToggleButton
-          size='medium'
-          value="text"
-          onChange={toggleTheme}
-          css={css`width: 30; height: 30; font-size: 25px`}
-        >
-          <Tooltip title="Toggle theme" >
-            <span>{themeName === 'light' ? '🌙' : '☀️'}</span>
-          </Tooltip>
-        </ToggleButton>
-      </Box>
+      </ToggleButton>
       <Box css={wrapperCSS}>
-        {plotterArt.map((art) => (
-          <PlotterArt key={art.title} {...art} />
-        ))}
+        <Menu />
+        <Box css={plotterWrapperCSS}>
+          {plotterArt.map((art) => (
+            <PlotterArt key={art.title} {...art} />
+          ))}
+        </Box>
       </Box>
-      <Menu isOpen={isMenuOpen} toggleMenu={toggleMenu} />
     </Experimental_CssVarsProvider>
   )
 }
 
-const headerCSS = css`
-  display: flex;
-  justify-content: space-between;
+const plotterWrapperCSS = css`
+  flex-grow: 1;
 `
 
 const wrapperCSS = css`
-          `
+  display: flex;
+  flex-direction: row;
+`
+
+const toggleCSS = css`
+  width: 40px;
+  height: 40px;
+  font-size: 25px;
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
+`
 
 export default App

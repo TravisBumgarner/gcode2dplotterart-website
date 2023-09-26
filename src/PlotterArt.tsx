@@ -11,7 +11,7 @@ interface Props {
 
 const Example = ({ title, description, code }: Props) => {
   return (
-    <Box>
+    <Box css={wrapperCSS}>
       <Typography variant="h2">{title}</Typography>
       <Typography variant="body1">{description}</Typography>
       <Box css={codeWrapperCSS}>
@@ -25,6 +25,11 @@ const Example = ({ title, description, code }: Props) => {
     </Box>
   )
 }
+
+const wrapperCSS = css`
+  width: 100%;
+  margin-top: 3rem;
+`
 
 const codeWrapperCSS = css`
   font-family: "Roboto Mono";

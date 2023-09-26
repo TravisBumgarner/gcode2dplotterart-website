@@ -2,3 +2,9 @@ body {
   font-family: "Roboto";
   background-color: var(--mui-palette-background-default);
 }
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
