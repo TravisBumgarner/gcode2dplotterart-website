@@ -28,13 +28,12 @@ const Example = ({ title, description, code }: Props) => {
 
 const wrapperCSS = css`
   width: 100%;
-  margin-top: 3rem;
+  padding: 0.5rem;
+  overflow: auto;
 `
 
 const codeWrapperCSS = css`
   font-family: "Roboto Mono";
-  max-height:500px;
-  overflow: auto;
 `
 
 export default Example

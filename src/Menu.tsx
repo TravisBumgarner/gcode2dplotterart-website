@@ -1,34 +1,56 @@
 /** @jsxImportSource @emotion/react */
 
-import { Box, ListItemButton, css } from '@mui/material'
+import { Box, ListItemButton, ListSubheader, css } from '@mui/material'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
 
-import plotterArt from './content'
-
-export const MENU_WIDTH = 250
+import examples from './examples'
 
 const Menu = () => {
   return (
     <Box css={menuCSS}>
-      <List>
+      <List
+        subheader={
+          <ListSubheader>
+            Examples
+          </ListSubheader>
+        }
+      >
         {
-          plotterArt.sort((a, b) => a.title > b.title ? 1 : -1).map((art, i) => (
+          examples.sort((a, b) => a.title > b.title ? 1 : -1).map((art, i) => (
             <ListItem disablePadding key={art.title}>
-              <ListItemButton href={art.id}>
-                <ListItemText primary={art.title} secondary={art.description} />
+              <ListItemButton href={`/examples/${art.id}`}>
+                <ListItemText primary={art.title} />
               </ListItemButton>
             </ListItem>
           ))
         }
       </List>
-    </Box>
+      <List
+        subheader={
+          <ListSubheader>
+            Tutorials
+          </ListSubheader>
+        }
+      >
+        {
+          examples.sort((a, b) => a.title > b.title ? 1 : -1).map((art, i) => (
+            <ListItem disablePadding key={art.title}>
+              <ListItemButton href={`/examples/${art.id}`}>
+                <ListItemText primary={art.title} />
+              </ListItemButton>
+            </ListItem>
+          ))
+        }
+      </List>
+    </Box >
   )
 }
 
 const menuCSS = css`
-  width: ${MENU_WIDTH}px;
+  flex-basis: 200px;
+  flex-shrink: 0;
 `
 
 export default Menu
