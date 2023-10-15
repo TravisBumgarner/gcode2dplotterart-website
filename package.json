@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "@craco/craco": "^7.1.0",
     "@types/lodash": "^4.14.199",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
@@ -22,6 +23,7 @@
     "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^5.0.8",
     "@fontsource/roboto-mono": "^5.0.8",
+    "@mdx-js/loader": "^2.3.0",
     "@mui/icons-material": "^5.14.9",
     "@mui/material": "^5.14.9",
     "@testing-library/jest-dom": "^5.17.0",
@@ -42,10 +44,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject",
     "deploy": "gcloud config set project silly-side-projects && gcloud builds submit --tag gcr.io/silly-side-projects/plotterart && gcloud run deploy plotterart --image gcr.io/silly-side-projects/plotterart --platform managed --region us-east1"
   },
   "eslintConfig": {

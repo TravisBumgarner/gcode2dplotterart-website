@@ -8,9 +8,9 @@ export interface TPlotterArt {
   id: string
 }
 
-const plotterArt: TPlotterArt[] = [
-  square,
-  sinewaves
-]
+const examples: Record<string, TPlotterArt> = {
+  [square.id]: square,
+  [sinewaves.id]: sinewaves
+}
 
-export default plotterArt
+export default examples
