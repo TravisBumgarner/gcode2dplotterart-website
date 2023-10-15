@@ -1,4 +1,5 @@
-import sinewaves from './1_sinewaves'
+import sinewaves from './2_sinewaves'
+import square from './1_square'
 
 export interface TPlotterArt {
   title: string
@@ -8,9 +9,7 @@ export interface TPlotterArt {
 }
 
 const plotterArt: TPlotterArt[] = [
-  sinewaves,
-  sinewaves,
-  sinewaves,
+  square,
   sinewaves
 ]
 

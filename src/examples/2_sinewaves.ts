@@ -13,7 +13,9 @@ def sine_waves(y_offset, amplitude):
 
   steps_per_integer = 10
 
-  for index, step in enumerate(range(plotter.x_min * steps_per_integer, plotter.x_max * steps_per_integer, 1)):
+  adjusted_min = plotter.x_min * steps_per_integer
+  adjusted_max = plotter.x_max * steps_per_integer
+  for index, step in enumerate(range(adjusted_min, adjusted_max)):
 
     x = step / steps_per_integer
     y = amplitude * math.sin(2 * math.pi * x / wavelength)
@@ -29,7 +31,9 @@ def sine_waves(y_offset, amplitude):
 if __name__ == "__main__":
   padding_near_borders = 5
 
-  for y_offset in range(plotter.y_min + padding_near_borders, plotter.y_max - padding_near_borders, 10):
+  adjusted_min = plotter.y_min + padding_near_borders
+  adjusted_max = plotter.y_max - padding_near_borders
+  for y_offset in range(adjusted_min, adjusted_max, 10):
     amplitude=y_offset / 10.0
     sine_waves(y_offset, amplitude)
 

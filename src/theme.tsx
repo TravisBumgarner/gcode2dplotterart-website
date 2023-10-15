@@ -1,7 +1,24 @@
 import { type ThemeOptions, experimental_extendTheme as extendTheme } from '@mui/material/styles'
 import _ from 'lodash'
+import { type LinkProps } from '@mui/material'
+import { Link as RouterLink, type LinkProps as RouterLinkProps } from 'react-router-dom'
+import { forwardRef } from 'react'
+
+const LinkBehavior = forwardRef<HTMLAnchorElement, Omit<RouterLinkProps, 'to'> & { href: RouterLinkProps['to'] }
+>((props, ref) => {
+  const { href, ...other } = props
+  return <RouterLink ref={ref} to={href} {...other} />
+})
+LinkBehavior.displayName = 'LinkBehavior'
 
 const baseThemeOptions: ThemeOptions = {
+  components: {
+    MuiLink: {
+      defaultProps: {
+        component: LinkBehavior
+      } as LinkProps
+    }
+  },
   typography: {
     fontFamily: 'Roboto',
     h1: {

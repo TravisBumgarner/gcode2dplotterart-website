@@ -3,11 +3,11 @@
 import { Box, css, Experimental_CssVarsProvider, ToggleButton, Tooltip } from '@mui/material'
 
 import './style.css'
-import plotterArt from './content'
-import PlotterArt from './PlotterArt'
 import { useCallback, useMemo, useState } from 'react'
 import Menu from './Menu'
 import { lightTheme, darkTheme } from './theme'
+import Router from './Router'
+import { BrowserRouter } from 'react-router-dom'
 
 function App() {
   const [themeName, setThemeName] = useState<'light' | 'dark'>('light')
@@ -25,32 +25,26 @@ function App() {
   }, [])
 
   return (
-    <Experimental_CssVarsProvider theme={theme}>
-      <ToggleButton
-        size='medium'
-        value="text"
-        onChange={toggleTheme}
-        css={toggleCSS}
-      >
-        <Tooltip title="Toggle theme" >
-          <span>{themeName === 'light' ? '🌙' : '☀️'}</span>
-        </Tooltip>
-      </ToggleButton>
-      <Box css={wrapperCSS}>
-        <Menu />
-        <Box css={plotterWrapperCSS}>
-          {plotterArt.map((art) => (
-            <PlotterArt key={art.title} {...art} />
-          ))}
+    <BrowserRouter>
+      <Experimental_CssVarsProvider theme={theme}>
+        <ToggleButton
+          size='medium'
+          value="text"
+          onChange={toggleTheme}
+          css={toggleCSS}
+        >
+          <Tooltip title="Toggle theme" >
+            <span>{themeName === 'light' ? '🌙' : '☀️'}</span>
+          </Tooltip>
+        </ToggleButton>
+        <Box css={wrapperCSS}>
+          <Menu />
+          <Router />
         </Box>
-      </Box>
-    </Experimental_CssVarsProvider>
+      </Experimental_CssVarsProvider>
+    </BrowserRouter>
   )
 }
-
-const plotterWrapperCSS = css`
-  flex-grow: 1;
-`
 
 const wrapperCSS = css`
   display: flex;
