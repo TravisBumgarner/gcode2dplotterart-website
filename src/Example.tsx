@@ -2,14 +2,18 @@
 
 import { Box, Typography, css } from '@mui/material'
 import { CodeBlock, dracula } from 'react-code-blocks'
+import examples from './examples'
+import { useMemo } from 'react'
 
 interface Props {
-  title: string
-  description: string
-  code: string
+  id: string
 }
 
-const Example = ({ title, description, code }: Props) => {
+const Example = ({ id }: Props) => {
+  const { title, description, code } = useMemo(() => {
+    return examples[id]
+  }, [id])
+
   return (
     <Box css={wrapperCSS}>
       <Typography variant="h2">{title}</Typography>

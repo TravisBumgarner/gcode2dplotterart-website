@@ -6,6 +6,7 @@ import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
 
 import examples from './examples'
+import tutorials from './tutorials'
 
 const Menu = () => {
   return (
@@ -18,10 +19,10 @@ const Menu = () => {
         }
       >
         {
-          examples.sort((a, b) => a.title > b.title ? 1 : -1).map((art, i) => (
-            <ListItem disablePadding key={art.title}>
-              <ListItemButton href={`/examples/${art.id}`}>
-                <ListItemText primary={art.title} />
+          Object.values(examples).sort((a, b) => a.title > b.title ? 1 : -1).map((example, i) => (
+            <ListItem disablePadding key={example.title}>
+              <ListItemButton href={`/examples/${example.id}`}>
+                <ListItemText primary={example.title} />
               </ListItemButton>
             </ListItem>
           ))
@@ -35,10 +36,10 @@ const Menu = () => {
         }
       >
         {
-          examples.sort((a, b) => a.title > b.title ? 1 : -1).map((art, i) => (
-            <ListItem disablePadding key={art.title}>
-              <ListItemButton href={`/examples/${art.id}`}>
-                <ListItemText primary={art.title} />
+          Object.values(tutorials).sort((a, b) => a.title > b.title ? 1 : -1).map((tutorial, i) => (
+            <ListItem disablePadding key={tutorial.title}>
+              <ListItemButton href={`/tutorials/${tutorial.id}`}>
+                <ListItemText primary={tutorial.title} />
               </ListItemButton>
             </ListItem>
           ))
