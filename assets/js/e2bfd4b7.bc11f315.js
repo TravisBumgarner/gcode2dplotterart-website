@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[3701],{1535:e=>{e.exports=JSON.parse('{"label":"docusaurus","permalink":"/gcode2dplotterart-website/blog/tags/docusaurus","allTagsPath":"/gcode2dplotterart-website/blog/tags","count":4}')}}]);
